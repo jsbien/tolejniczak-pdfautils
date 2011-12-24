@@ -1,0 +1,7 @@
+W pracy nazwy stworzonych programów są omyłkowo podane jako pdfa2hocr, pdfastructurebrowser i pdfavalidate.
+W rzeczywistości po zainstalowaniu pakietu widoczne będą programy pdfa2hocr.py, pdfastructurebrowser.py i pdfavalidate.py.
+
+W pracy podano, że skrypt pagina.py potrafi znaleźć paginę dla słownika Lindego. Było to prawdą dopóki parametr określający kiedy sklejają się linie w punkcie 13 rozdziału 8.1 wynosił 60%. Potem został zmieniony na 90% ale spowodowało to, że skrypt przestał sobie radzić z paginą. Rozwiązaniem była by możliwość podania wartości tego parametru jako argumentu konwertera lub modyfikacja skryptu.
+
+W katalogu z dokumentacją podano drugą wersję pliku columnize.py, w której parametr ten ma wartość 60%. Generalnie im większy parametr, tym bardziej równe muszą być kawałki linii znalezione przez PDFMinera żeby połączyły się w jedną linię - przez co nie łączymy linii które nie powinny być łączone, ale też części takich, które powinny być połączone.
+

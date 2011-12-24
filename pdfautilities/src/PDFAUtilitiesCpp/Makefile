@@ -1,0 +1,4 @@
+ALL:
+	swig -python pdfaimg.i
+	g++ -fno-stack-protector -fpic -c ImageOutputDev.cc ImageOutputDev.h pdfaimg_wrap.c pdfaimg.cc -lpoppler -I/usr/include/python2.6
+	g++ -shared pdfaimg.o pdfaimg_wrap.o ImageOutputDev.o -o _pdfaimg.so -lpoppler

@@ -1,0 +1,58 @@
+Konwerter jest uruchamiany poleceniem pdfa2hocr.py. Najprostszy przypadek użycia ma postać:
+
+pdfa2hocr.py plik.pdf wynik.html
+
+Polecenie to spowoduje eksport pliku plik.pdf do formatu hOCR z eksportem struktury logicznej pliku do struktury logicznej hOCR.
+
+Polecenie:
+
+pdfa2hocr.py -p plik.pdf wynik.html
+pdfa2hocr.py --pdfminer plik.pdf wynik.html
+
+zamiast eksportować strukturę logiczną z pliku PDF/A analizuje układ strony za pomocą programu PDFMiner i zapisuje go jako elementy struktury dokumentu.
+
+Polecenie:
+
+pdfa2hocr.py -p -i plik.pdf wynik.html
+pdfa2hocr.py --pdfminer -i plik.pdf wynik.html
+pdfa2hocr.py -p --ignore-text-groups plik.pdf wynik.html
+pdfa2hocr.py --pdfminer --ignore-text-groups plik.pdf wynik.html
+
+działa podobnie jak poprzednie, ale eksportuje tylko elementy typu textbox (odpowiedniki ocr_carea z hOCR), ignorując większe jednostki układu strony (textgroup) znalezione przez PDFMiner.
+
+Podanie dodatkowej opcji -u/--icu <LOCALE> spowoduje podział tekstu w wynikowym dokumencie hOCR na wyrazy z użyciem biblioteki ICU dla lokalizacji LOCALE.
+
+Podanie opcji -m/--mapping <MAPPING_FILE> spowoduje użycie własnego mapowania elementów struktury logicznej PDF lub obiektów znalezionych przez analizator PDFMinera na elementy hOCR. Mapowanie powinno być zdefiniowane w pliku MAPPING_FILE.
+
+Format pliku z mapowaniem:
+
+nazwa_elementu<NL>
+nazwa_elementu<TAB>tag_HTML<NL>
+nazwa_elementu<TAB>tag_HTML<TAB>element_HOCR<NL>
+nazwa_elementu<TAB>tag_HTML<TAB>element_HOCR<TAB>bbox<NL>
+
+Poszczególnym przykładom linii odpowiadają następujące znaczenia
+
+- element będzie zignorowany, ale będziemy eksportować jego dzieci,
+- element będzie reprezentowany jako <tag_HTML>...</tagHTML>,
+- element będzie reprezentowany jako <tag_HTML class="element_HOCR">...</tagHTML>,
+- element będzie reprezentowany jako <tag_HTML class="element_HOCR" title="bbox ...">...</tagHTML>.
+
+Podanie opcji -c/--columns <COL_NUM> spowoduje podział każdej strony w dokumencie (nie wymienionej w argumencie opcji -i) na COL_NUM kolumn. Opcja może być użyta jedynie jeżeli jest jednocześnie użyta opcja -p.
+
+Podanie opcji -l/--module <MODULE> spowoduje przetworzenie każdej strony skryptem MODULE po podziale na kolumny (np. w celu znalezienia paginy). Opcja może być użyta jedynie jeżeli jest jednocześnie użyta opcja -c.
+
+Podanie opcji -g/--ignore-pages <PAGE_LIST> spowoduje zignorowanie stron z listy stron oddzielonych przecinkami PAGE_LIST przez algorytm podziału na kolumny. Opcja może być użyta jedynie jeżeli jest jednocześnie użyta opcja -c.
+
+Podanie opcji -r/--resolution <WIDTH>x<HEIGHT> określa wymiary strony według których w wynikowym pliku będą określane gabaryty.
+
+Podanie opcji -t/--special-font-tags powoduje użycie elementów ocrx_bold i ocrx_italic w wynikowym pliku.
+
+Podanie opcji -h/--help powoduje wypisanie pomocy.
+
+Podanie opcji -f/--font-mapping <PLIK> pozwala na podanie pliku z mapowaniem posctscriptowych nazw fontów na nazwę rodziny fontu.
+
+Plik ma postać:
+
+NAZWA_POSCTSCRIPTOWA<TAB>RODZINA_FONTU<NL>
+

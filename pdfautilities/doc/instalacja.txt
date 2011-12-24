@@ -1,0 +1,49 @@
+Przed instalacją pakietu PDFAUtlities należy zainstalować następujące pakiety:
+
+* python-numpy
+* libicu-dev
+* fonttools
+
+W FontTools pojawia się następujący błąd przy niektórych fontach:
+
+...
+File "/usr/lib/pymodules/python2.6/FontTools/fontTools/ttLib/tables/_n_a_m_e.py", line 38, in decompile
+assert len(name.string) == name.length
+
+żeby go wyeliminować wystarczy wykomentować problematyczną asercję. W pliku patch.txt znajduje się odpowiedni patch - należy pobrać źródła FontTools w wersji 2.3 (http://sourceforge.net/projects/fonttools/) i rozpakować (utworzony zostanie katalog fonttools-2.3. W katalogu nadrzędnym fonttools-2.3 należy wykonać polecenie patch -p0 < patch.txt.
+
+* python-imaging (PIL)
+* swig
+* python2.6-dev (PDFAUtilities testowane z wersją 2.6 Pythona)
+* libpoppler7 (wersja popplera 0.14.3, inne mogą nie działać)
+* libpoppler-dev (j. w.)
+* python-pyicu (pakiet w Ubuntu którego używam - Maverick Meerkat - działa niepoprawnie i musiałem pobrać PyICU stąd: http://pyicu.osafoundation.org/)
+
+Test poprawności działania python-pyicu:
+
+import icu
+
+s = 'foo bar'
+brk = icu.BreakIterator.createWordInstance(icu.Locale())
+
+# This one produces bogus results with PyICU 1.0:
+brk.setText(s)
+print list(brk)
+
+# This one always produces correct results:
+brk.setText(icu.UnicodeString(s))
+print list(brk)
+
+jest dobrze jeśli da:
+
+[3, 4, 7]
+[3, 4, 7]
+
+Zmodyfikowany program EXIF.py jest umieszczony w kodzie źródłowym programu i zostanie zainstalowany przez setup.py poniżej.
+
+Stąd: http://www.unixuser.org/~euske/python/pdfminer/index.html należy pobrać i zainstalować pakiet pdfminer (PDFAUtilities testowane z wersją 20110227).
+
+W katalogu ze źródłami wchodzimy do katalogu PDFAUtilities i uruchamiamy polecenie sudo python setup.py install.
+
+W katalogu ze źródłami wchodzimy do katalogu PDFAUtilitiesCpp i uruchamiamy polecenie make. Kopiujemy _pdfaimg.so i pdfaimg.py do katalogu do którego zostały skopiowane przez "sudo python setup.py install" pliki z PDFAUtilities (będzie to najprawdopodobniej /usr/local/lib/python2.6/dist-packages).
+

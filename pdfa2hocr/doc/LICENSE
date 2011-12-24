@@ -1,0 +1,106 @@
+The entire pdfa2hocr.py package is distributed under Expat license, sometimes called MIT
+license:
+
+
+Copyright (c) 2010-2011 Tomasz Olejniczak <tomek.87@poczta.onet.pl>
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of
+this software and associated documentation files (the "Software"), to deal in
+the Software without restriction, including without limitation the rights to
+use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
+the Software, and to permit persons to whom the Software is furnished to do so,
+subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
+FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
+IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+
+The PDFAUtilities software was created solely by Tomasz Olejniczak
+and Yusuke Shinyama is not in any way connected with its development.
+However, because some parts of its code are heavily based on PDFMiner software
+the copyright and permission notice from PDFMiner is included:
+
+
+Copyright (c) 2004-2010 Yusuke Shinyama <yusuke at cs dot nyu dot edu>
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of
+this software and associated documentation files (the "Software"), to deal in
+the Software without restriction, including without limitation the rights to
+use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
+the Software, and to permit persons to whom the Software is furnished to do so,
+subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
+FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
+IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+
+The ttFontMod.py file is distributed under the following license:
+
+
+Copyright 2011
+by Tomasz Olejniczak
+
+                        All Rights Reserved
+
+Permission to use, copy, modify, and distribute this software and 
+its documentation for any purpose and without fee is hereby granted,
+provided that the above copyright notice appear in all copies and 
+that both that copyright notice and this permission notice appear 
+in supporting documentation, and that the name of Tomasz Olejniczak 
+not be used in advertising or publicity pertaining to
+distribution of the software without specific, written prior
+permission.
+
+TOMASZ OLEJNICZAK DISCLAIM ALL WARRANTIES WITH
+REGARD TO THIS SOFTWARE, INCLUDING ALL IMPLIED WARRANTIES OF
+MERCHANTABILITY AND FITNESS, IN NO EVENT SHALL TOMASZ OLEJNICZAK
+BE LIABLE FOR ANY SPECIAL, INDIRECT OR CONSEQUENTIAL
+DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR
+PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER
+TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+PERFORMANCE OF THIS SOFTWARE.
+
+The ttFontMod.py file contains code based on code from FontTools software.
+The creator of FontTools, Just van Rossum, is not in any way connected with
+the creation of PDFAutilities software which was created solely by Tomasz Olejniczak.
+The following copyright and permission notice is included because the ttFontMod.py file contains
+modified code from FontTools:
+
+
+Copyright 1999-2004
+by Just van Rossum, Letterror, The Netherlands.
+
+                        All Rights Reserved
+
+Permission to use, copy, modify, and distribute this software and 
+its documentation for any purpose and without fee is hereby granted,
+provided that the above copyright notice appear in all copies and 
+that both that copyright notice and this permission notice appear 
+in supporting documentation, and that the names of Just van Rossum 
+or Letterror not be used in advertising or publicity pertaining to
+distribution of the software without specific, written prior
+permission.
+
+JUST VAN ROSSUM AND LETTERROR DISCLAIM ALL WARRANTIES WITH
+REGARD TO THIS SOFTWARE, INCLUDING ALL IMPLIED WARRANTIES OF
+MERCHANTABILITY AND FITNESS, IN NO EVENT SHALL JUST VAN ROSSUM OR 
+LETTERROR BE LIABLE FOR ANY SPECIAL, INDIRECT OR CONSEQUENTIAL
+DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR
+PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER
+TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+PERFORMANCE OF THIS SOFTWARE.
+
