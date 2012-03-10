@@ -220,7 +220,7 @@ class HOCRDirectConverter(PDFLayoutAnalyzer):
             self.__outfp.write("<span style=\"")
             name = None
             if self.__fontMap != None:
-                name = self.__fontMap.get(self.__font.name)
+                name = self.__fontMap.getName(self.__font.name)
             if name == None:
                 name = self.__font.name
             self.__outfp.write("font-family: " + self.__font.name)
