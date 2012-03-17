@@ -44,7 +44,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
 from pdfminer.converter import PDFLayoutAnalyzer
-from pdfminer.layout import LTPage, LTText, LTLine, LTRect, LTPolygon
+from pdfminer.layout import LTPage, LTText, LTLine, LTRect, LTCurve
 from pdfminer.layout import LTFigure, LTImage, LTChar, LTTextLine, LTTextBox, LTTextGroup
 from pdfminer.utils import enc, bbox2str
 from pdfminer.pdfparser import PDFDocument, PDFSyntaxError, PDFParser
@@ -559,7 +559,7 @@ class PDFMinerConverter(PDFLayoutAnalyzer):
                 pass
             elif isinstance(item, LTRect):
                 pass
-            elif isinstance(item, LTPolygon):
+            elif isinstance(item, LTCurve):
                 pass
             elif isinstance(item, LTFigure):
                 pass
@@ -597,11 +597,11 @@ class PDFMinerConverter(PDFLayoutAnalyzer):
                 if self.__font != None:
                     self.__node.add(self.__font)
                     #assert(self.__node.textOf() == "text")
-                self.__node.add(item.text)    
+                self.__node.add(item.get_text())    
             elif isinstance(item, LTText):
                 pass
                 # TODO: NOTE ignorujemy tekst pusty (tu byly same spacje)
-                #self.outfp.write('<text>%s</text>\n' % item.text)
+                #self.outfp.write('<text>%s</text>\n' % item.get_text())
             elif isinstance(item, LTImage):
                 pass
             elif isinstance(item, LTTextGroup):
@@ -618,7 +618,7 @@ class PDFMinerConverter(PDFLayoutAnalyzer):
         # ltpage to strona ktorej dziecmi sa elementy typu "textbox",
         # w ltpage.layout jest uklad z uzyciem elementow "textgroup" (ktora
         # zawiera jako potomkow takze elementy "textbox" bedace dziecmi strony)
-        if ltpage.layout and not self.__ignore: # nie ignorujemy "textgroup" i
+        if ltpage.groups and not self.__ignore: # nie ignorujemy "textgroup" i
                 # "textgroup" sa w zanalizowanym ukladzie 
             self.__num += 1
             self.__stack.append(self.__node)
@@ -628,7 +628,8 @@ class PDFMinerConverter(PDFLayoutAnalyzer):
             if self.__lib != None:
                 self.__lib.addBbox(self.__page.getPageId(), self.__page.getBbox())
             self.__node = self.__page
-            render(ltpage.layout) # eksportujemy "textgroup" i potem rekurencyjnie
+            for lay in ltpage.groups:
+              render(lay) # eksportujemy "textgroup" i potem rekurencyjnie
                 # potomkow
             self.__node = self.__stack.pop()
             if self.__hocr == None:

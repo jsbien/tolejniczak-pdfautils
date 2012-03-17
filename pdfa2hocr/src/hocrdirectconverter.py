@@ -44,7 +44,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
 from pdfminer.converter import PDFLayoutAnalyzer
-from pdfminer.layout import LTPage, LTText, LTLine, LTRect, LTPolygon
+from pdfminer.layout import LTPage, LTText, LTLine, LTRect, LTCurve
 from pdfminer.layout import LTFigure, LTImage, LTChar, LTTextLine, LTTextBox
 from pdfminer.layout import LTTextGroup
 from pdfminer.utils import enc
@@ -113,7 +113,7 @@ class HOCRDirectConverter(PDFLayoutAnalyzer):
                 pass
             elif isinstance(item, LTRect):
                 pass
-            elif isinstance(item, LTPolygon):
+            elif isinstance(item, LTCurve):
                 pass
             elif isinstance(item, LTFigure):
                 pass
@@ -129,7 +129,7 @@ class HOCRDirectConverter(PDFLayoutAnalyzer):
                     render(child)
                 text = u""
                 for c in self.__chars:
-                    text += c.text
+                    text += c.get_text()
                 if self.__icu != None:
                     # zob. metode HOCRExporter.__exportNode 
                     self.__divs = divideIntoWords(text, self.__icu)
@@ -158,7 +158,7 @@ class HOCRDirectConverter(PDFLayoutAnalyzer):
             elif isinstance(item, LTText):
                 pass
                 # TODO: NOTE ignorujemy tekst pusty (tu byly same spacje)
-                #self.outfp.write('<text>%s</text>\n' % item.text)
+                #self.outfp.write('<text>%s</text>\n' % item.get_text())
             elif isinstance(item, LTImage):
                 pass
             elif isinstance(item, LTTextGroup):
@@ -175,7 +175,7 @@ class HOCRDirectConverter(PDFLayoutAnalyzer):
         # w ltpage.layout jest struktura z uzyciem elementow "textgroup" (ktora
         # zawiera jako potomkow takze elementy "textbox" bedace dziecmi strony)
         self.__pagebbox = normalize(ltpage.bbox)
-        if ltpage.layout and not self.__ignore: # nie ignorujemy "textgroup" i
+        if ltpage.groups and not self.__ignore: # nie ignorujemy "textgroup" i
                 # "textgroup" sa w zanalizowanej strukturze 
             #print "ignore"
             self.__num += 1
@@ -184,7 +184,8 @@ class HOCRDirectConverter(PDFLayoutAnalyzer):
             self.__outfp.write("pageno " + str(self.__num) + ";")
             self.__outfp.write("bbox " + bbox2str(scaleBbox(normalize(ltpage.bbox))))
             self.__outfp.write("\">")
-            render(ltpage.layout)
+            for lay in ltpage.groups:
+              render(lay)
             self.__outfp.write("</div>")
         else: # ignorujemy "textgroup" lub ich nie ma 
             # TODO: I sprawdzic: jezeli brak ltpage.layout to chyba rownoznaczne ze strona bez tekstu?
@@ -220,7 +221,7 @@ class HOCRDirectConverter(PDFLayoutAnalyzer):
             self.__outfp.write("<span style=\"")
             name = None
             if self.__fontMap != None:
-                name = self.__fontMap.getName(self.__font.name)
+                name = self.__fontMap.get(self.__font.name)
             if name == None:
                 name = self.__font.name
             self.__outfp.write("font-family: " + self.__font.name)
@@ -240,7 +241,7 @@ class HOCRDirectConverter(PDFLayoutAnalyzer):
                     self.__outfp.write("<span class=\"ocrx_word\" title=\"bbox " + bbox2str(changeCoords(self.__pagebbox, self.__divbboxes[self.__wordInd])) + "\">")
                 self.__wordInd += 1
                 self.__inWord = True
-        self.__outfp.write(item.text.replace("<", "&lt;").replace("&", "&amp;").encode("utf-8"))
+        self.__outfp.write(item.get_text().replace("<", "&lt;").replace("&", "&amp;").encode("utf-8"))
         if self.__icu != None:
             self.__ind += 1
             if self.__ind in self.__divs:
