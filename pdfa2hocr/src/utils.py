@@ -332,7 +332,7 @@ def generateDivBboxesDirect(divs, items, hasFont, selffont, lib, page, enc):
             divind += 1
             bbox = None
             white = True
-        if item.text != " " and item.text != "\n":
+        if item.get_text() != " " and item.get_text() != "\n":
             white = False
         bbox = combine(bbox, normalize(item.bbox))
         ind += 1
