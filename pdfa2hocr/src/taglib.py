@@ -148,7 +148,10 @@ class TagLib:
         #print "pages"
         if self.__doc.catalog.get("StructTreeRoot") != None:
             self.__tagtree = dict_value(self.__doc.catalog.get('StructTreeRoot'))
-            self.__tagtreeId = self.__doc.catalog.get('StructTreeRoot').objid
+            if not isinstance(self.__doc.catalog.get('StructTreeRoot'), dict):
+                self.__tagtreeId = self.__doc.catalog.get('StructTreeRoot').objid
+            else:
+                self.__tagtreeId = 0
         if self.__tagtree != None:
             self.__roleMap = dict_value(self.__tagtree.get("RoleMap"))
             self.__classMap = dict_value(self.__tagtree.get("ClassMap"))
