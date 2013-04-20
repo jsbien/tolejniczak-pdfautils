@@ -155,10 +155,6 @@ class HOCRDirectConverter(PDFLayoutAnalyzer):
                 self.__outfp.write("</div>")
             elif isinstance(item, LTChar):
                 self.__chars.append(item)
-            elif isinstance(item, LTText):
-                pass
-                # TODO: NOTE ignorujemy tekst pusty (tu byly same spacje)
-                #self.outfp.write('<text>%s</text>\n' % item.get_text())
             elif isinstance(item, LTImage):
                 pass
             elif isinstance(item, LTTextGroup):
@@ -168,6 +164,10 @@ class HOCRDirectConverter(PDFLayoutAnalyzer):
                 for child in item:
                     render(child)
                 self.__outfp.write("</div>")
+            elif isinstance(item, LTText):
+                pass
+                # TODO: NOTE ignorujemy tekst pusty (tu byly same spacje)
+                #self.outfp.write('<text>%s</text>\n' % item.get_text())
             else:
                 assert 0, item
             return
