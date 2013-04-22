@@ -1,4 +1,4 @@
-#!/usr/bin/pythons
+#!/usr/bin/python
 """
 Copyright (c) 2010-2011 Tomasz Olejniczak <tomek.87@poczta.onet.pl>
 
